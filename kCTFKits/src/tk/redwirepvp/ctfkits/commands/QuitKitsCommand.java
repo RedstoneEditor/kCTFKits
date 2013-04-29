@@ -2,6 +2,7 @@ package tk.redwirepvp.ctfkits.commands;
 
 import java.io.File;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Scoreboard;
 
 import tk.redwirepvp.ctfkits.Main;
 
@@ -26,7 +28,10 @@ public class QuitKitsCommand implements CommandExecutor {
 			String[] args) {
 		if (cmd.getName().equalsIgnoreCase("quitkits")) {
 			if (sender instanceof Player) {
-				if (p.users.contains(((Player) sender).getName())) {
+				if (p.players.containsKey(((Player) sender).getName())) {
+				    Scoreboard blankBoard = p.getServer().getScoreboardManager().getNewScoreboard();
+				    ((Player)sender).setScoreboard(blankBoard);
+				    p.board.resetScores(Bukkit.getOfflinePlayer(sender.getName()));
 					((Player) sender).getInventory().clear();
 					FileConfiguration config = null;
 					File file = new File("plugins" + File.separator

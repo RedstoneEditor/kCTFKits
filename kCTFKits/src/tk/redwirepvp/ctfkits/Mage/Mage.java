@@ -1,7 +1,5 @@
 package tk.redwirepvp.ctfkits.Mage;
 
-import java.util.ArrayList;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -14,6 +12,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.Vector;
 
 import tk.redwirepvp.ctfkits.Main;
+import tk.redwirepvp.ctfkits.utils.FireworkEffectPlayer;
 
 public class Mage {
 	private Main p;
@@ -21,8 +20,8 @@ public class Mage {
 	public Mage(Main i) {
 		p = i;
 	}
-	
-	public ArrayList<String> players = new ArrayList<String>();
+
+	public FireworkEffectPlayer fep = new FireworkEffectPlayer();
 
 	@SuppressWarnings("deprecation")
 	public void giveKit(Player p) {
@@ -75,14 +74,15 @@ public class Mage {
 		pi.addItem(heal);
 		p.updateInventory();
 		p.sendMessage(ChatColor.GREEN + "You are now a Mage");
+		System.out.println("setting xp");
+		p.setExp(1F);
+		System.out.println(p.getExp());
 	}
 
 	public void fireArrows(World world, Player player) {
-		 Projectile arrow = player.launchProjectile(Arrow.class);
-		 Vector vec = player.getLocation().getDirection();
-		 arrow.setVelocity(new Vector
-		            (vec.getX() * 5,
-		            vec.getY() * 5,
-		             vec.getZ() * 5));
+		Projectile arrow = player.launchProjectile(Arrow.class);
+		Vector vec = player.getLocation().getDirection();
+		arrow.setVelocity(new Vector(vec.getX() * 5, vec.getY() * 5,
+				vec.getZ() * 5));
 	}
 }
