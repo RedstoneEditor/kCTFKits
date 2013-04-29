@@ -1,0 +1,12 @@
+name: kCTFKits
+main: tk.redwirepvp.ctfkits.Main
+author: RedstoneEditor
+version: 1.0
+commands:
+  mage:
+    usage: /<command>
+    description: Gives the sender the mage kit.
+  commands:
+  quitkits:
+    usage: /<command>
+    description: Leaves kCTFKit mode and gives back inventory
